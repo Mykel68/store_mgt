@@ -44,7 +44,7 @@ export default function Sidebar() {
               Dashboard
             </Link>
             <Link
-              href="#"
+              href="admin/store_code"
               className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-blue-500 hover:text-white"
             >
               <ShoppingCart className="h-4 w-4" />
