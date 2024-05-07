@@ -17,14 +17,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { logo } from "@/assets/favicon.png";
 
 export default function Sidebar() {
   return (
-    <div className="hidden border-r bg-muted/40 md:block">
+    <div className="hidden border-r bg-muted/40 md:block  ">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Package2 className="h-6 w-6" />
+            <Image src={logo} className="h-6 w-6" />
             <span className="">DCLM </span>
           </Link>
           <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
@@ -33,7 +35,7 @@ export default function Sidebar() {
           </Button>
         </div>
         <div className="flex-1">
-          <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-1">
+          <nav className="grid items-start px-2 text-xl font-medium lg:px-4 gap-1">
             <Link
               href="#"
               className="flex items-center gap-3 rounded-lg bg-blue-500 text-white px-3 py-2 transition-all hover:bg-muted hover:text-primary"
@@ -46,7 +48,7 @@ export default function Sidebar() {
               className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-blue-500 hover:text-white"
             >
               <ShoppingCart className="h-4 w-4" />
-              Orders
+              Store codes
               <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                 6
               </Badge>
@@ -56,14 +58,14 @@ export default function Sidebar() {
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-primary transition-all  hover:bg-blue-500 hover:text-white"
             >
               <Package className="h-4 w-4" />
-              Products{" "}
+              Register Equipments{" "}
             </Link>
             <Link
               href="#"
               className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all  hover:bg-blue-500 hover:text-white"
             >
               <Users className="h-4 w-4" />
-              Customers
+              Add Equipments
             </Link>
             <Link
               href="#"
