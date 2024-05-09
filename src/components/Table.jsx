@@ -19,18 +19,20 @@ export default function Component() {
   return (
     <Card className="">
       <CardHeader className="px-7">
-        <CardTitle>Orders</CardTitle>
-        <CardDescription>Recent orders from your store.</CardDescription>
+        <CardTitle>Store code</CardTitle>
+        <CardDescription>Equipment list.</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Customer</TableHead>
-              <TableHead className="hidden sm:table-cell">Type</TableHead>
-              <TableHead className="hidden sm:table-cell">Status</TableHead>
-              <TableHead className="hidden md:table-cell">Date</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Equipment</TableHead>
+              <TableHead className="hidden sm:table-cell">Location</TableHead>
+              <TableHead className="hidden sm:table-cell">Department</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Product class
+              </TableHead>
+              <TableHead className="text-right">Store code</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

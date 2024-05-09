@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, Search, CircleUser } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,7 +33,32 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
+const NavLink = ({ href, icon: Icon, label, badge, active }) => (
+  <Link
+    href={href}
+    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
+      active
+        ? "bg-blue-600 text-white"
+        : "text-muted-foreground hover:bg-blue-500 hover:text-white"
+    }`}
+  >
+    <Icon className="h-5 w-5" />
+    {label}
+    {badge && (
+      <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+        {badge}
+      </Badge>
+    )}
+  </Link>
+);
+
 export default function Header() {
+  const pathname = usePathname();
+
+  const isActive = (path) => {
+    return pathname === path;
+  };
+
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -42,50 +69,59 @@ export default function Header() {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col">
-          <nav className="grid gap-2 text-lg font-medium">
+          <nav className="grid items-start px-2 text-xl font-medium lg:px-4 gap-1">
             <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
+              href="/admin"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
             >
-              <Package2 className="h-6 w-6" />
-              <span className="sr-only">DCLM</span>
-            </Link>
-            <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-blue-500 text-white px-3 py-2 text-muted-foreground  "
-            >
-              <Home className="h-5 w-5" />
+              <Home className="h-4 w-4" />
               Dashboard
             </Link>
             <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl  px-3 py-2 text-foreground  hover:bg-blue-500 hover:text-white"
+              href="/admin/store_code"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/store_code")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
             >
-              <ShoppingCart className="h-5 w-5" />
-              Orders
+              <ShoppingCart className="h-4 w-4" />
+              Store codes
               <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                 6
               </Badge>
             </Link>
             <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground  hover:bg-blue-500 hover:text-white"
+              href="/admin/reg_equipment"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/reg_equipment")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
             >
-              <Package className="h-5 w-5" />
-              Products
+              <Package className="h-4 w-4" />
+              Register Equipments{" "}
+            </Link>
+            <Link
+              href="/admin/add_equipment"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/add_equipment")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              Add Equipments
             </Link>
             <Link
               href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground  hover:bg-blue-500 hover:text-white"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all  hover:bg-blue-500 hover:text-white"
             >
-              <Users className="h-5 w-5" />
-              Customers
-            </Link>
-            <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground  hover:bg-blue-500 hover:text-white"
-            >
-              <LineChart className="h-5 w-5" />
+              <LineChart className="h-4 w-4" />
               Analytics
             </Link>
           </nav>

@@ -1,3 +1,6 @@
+"use client";
+import { Logo } from "@/assets/logo.png";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   Bell,
@@ -18,15 +21,20 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { logo } from "@/assets/favicon.png";
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
+  const isActive = (path) => {
+    return pathname === path;
+  };
+
   return (
     <div className="hidden border-r bg-muted/40 md:block  ">
-      <div className="flex h-full max-h-screen flex-col gap-2">
-        <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+      <div className="flex h-full max-h-screen flex-col gap-2 ">
+        <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6  ">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Image src={logo} className="h-6 w-6" />
+            <Image src={Logo} className="h-6 w-6" />
             <span className="">DCLM </span>
           </Link>
           <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
@@ -35,17 +43,25 @@ export default function Sidebar() {
           </Button>
         </div>
         <div className="flex-1">
-          <nav className="grid items-start px-2 text-xl font-medium lg:px-4 gap-1">
+          <nav className="grid items-start px-2 text-xl font-medium lg:px-4 gap-1  ">
             <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg bg-blue-500 text-white px-3 py-2 transition-all hover:bg-muted hover:text-primary"
+              href="/admin"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
             >
               <Home className="h-4 w-4" />
               Dashboard
             </Link>
             <Link
-              href="admin/store_code"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-blue-500 hover:text-white"
+              href="/admin/store_code"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/store_code")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
             >
               <ShoppingCart className="h-4 w-4" />
               Store codes
@@ -54,15 +70,23 @@ export default function Sidebar() {
               </Badge>
             </Link>
             <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-primary transition-all  hover:bg-blue-500 hover:text-white"
+              href="/admin/reg_equipment"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/reg_equipment")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
             >
               <Package className="h-4 w-4" />
               Register Equipments{" "}
             </Link>
             <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all  hover:bg-blue-500 hover:text-white"
+              href="/admin/add_equipment"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/add_equipment")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
             >
               <Users className="h-4 w-4" />
               Add Equipments
@@ -79,16 +103,18 @@ export default function Sidebar() {
         <div className="mt-auto p-4">
           <Card x-chunk="dashboard-02-chunk-0">
             <CardHeader className="p-2 pt-0 md:p-4">
-              <CardTitle>Upgrade to Pro</CardTitle>
+              <CardTitle>Register Admin</CardTitle>
               <CardDescription>
-                Unlock all features and get unlimited access to our support
-                team.
+                Add admins to give them access to the site .
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-              <Button size="sm" className="w-full bg-blue-500">
-                Upgrade
-              </Button>
+            <CardContent className="p-2 pt-0 md:p-4 md:pt-0 ">
+              <Link
+                href="/register"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all  bg-blue-600 text-white hover:bg-blue-500 hover:text-white`}
+              >
+                <p className="text-center">Add</p>
+              </Link>
             </CardContent>
           </Card>
         </div>

@@ -1,5 +1,3 @@
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
 import Table from "@/components/Table";
 import Card from "@/components/Card";
 import Meteors from "@/components/MeteorsDemo";

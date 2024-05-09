@@ -10,16 +10,16 @@ import { Progress } from "@nextui-org/react";
 
 export default function Component() {
   return (
-    <Card>
+    <Card className>
       <CardHeader className="pb-2">
-        <CardDescription>This Week</CardDescription>
-        <CardTitle className="text-4xl">$1,329</CardTitle>
+        <CardDescription>Number of Equipment</CardDescription>
+        <CardTitle className="text-4xl">329</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="text-xs text-muted-foreground">+25% from last week</div>
       </CardContent>
       <CardFooter>
-        <Progress color="red-600" value={25} aria-label="25% increase" />
+        <Progress value={25} aria-label="25% increase" />
       </CardFooter>
     </Card>
   );
