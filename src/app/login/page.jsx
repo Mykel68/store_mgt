@@ -29,10 +29,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       console.log("Form data:", data);
-      const response = await axios.post(
-        "http://localhost:5000/auth/login",
-        data
-      );
+      const response = await axios.post(process.env.BACKEND_URL, data);
       if (response.data.token) {
         // Store the token in the client-side (e.g., in localStorage)
         localStorage.setItem("authToken", response.data.token);

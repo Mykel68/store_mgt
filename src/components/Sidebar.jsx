@@ -1,5 +1,5 @@
 "use client";
-import { Logo } from "@/assets/logo.png";
+import Logo from "@/assets/logo.png";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
@@ -33,7 +33,7 @@ export default function Sidebar() {
     <div className="hidden border-r bg-muted/40 md:block  ">
       <div className="flex h-full max-h-screen flex-col gap-2 ">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6  ">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
+          <Link href="/admin" className="flex items-center gap-2 font-semibold">
             <Image src={Logo} className="h-6 w-6" />
             <span className="">DCLM </span>
           </Link>
@@ -53,7 +53,7 @@ export default function Sidebar() {
               }`}
             >
               <Home className="h-4 w-4" />
-              Dashboard
+              Home
             </Link>
             <Link
               href="/admin/store_code"
@@ -110,10 +110,10 @@ export default function Sidebar() {
             </CardHeader>
             <CardContent className="p-2 pt-0 md:p-4 md:pt-0 ">
               <Link
-                href="/register"
+                href="/admin/register"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all  bg-blue-600 text-white hover:bg-blue-500 hover:text-white`}
               >
-                <p className="text-center">Add</p>
+                Register
               </Link>
             </CardContent>
           </Card>

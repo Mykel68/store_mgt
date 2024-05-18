@@ -20,9 +20,25 @@ export default function Component() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-6">
-          <div className="grid gap-3">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" type="text" className="w-full" />
+          <div className="grid gap-3 grid-cols-2">
+            <div className="">
+              <Label htmlFor="name">Model Name</Label>
+              <Input id="name" type="text" className="w-full" />
+            </div>
+            <div className="">
+              <Label htmlFor="name">Serial Number</Label>
+              <Input id="name" type="text" className="w-full" />
+            </div>
+          </div>
+          <div className="grid gap-3 grid-cols-2">
+            <div className="">
+              <Label htmlFor="name">Manufacturer</Label>
+              <Input id="name" type="text" className="w-full" />
+            </div>
+            <div className="">
+              <Label htmlFor="name">Vendor</Label>
+              <Input id="name" type="text" className="w-full" />
+            </div>
           </div>
           <div className="grid gap-3">
             <Label htmlFor="description">Description</Label>
