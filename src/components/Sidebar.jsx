@@ -92,6 +92,17 @@ export default function Sidebar() {
               Add Equipments
             </Link>
             <Link
+              href="/admin/projects"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/projects")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              Projects
+            </Link>
+            <Link
               href="#"
               className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all  hover:bg-blue-500 hover:text-white"
             >

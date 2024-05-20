@@ -5,7 +5,7 @@ export default function MeteorsDemo() {
   return (
     <div className="">
       <div className=" w-full relative  ">
-        <div className="absolute  h-full w-full bg-gradient-to-r from-blue-500 to-blue-800 transform scale-[0.80] rounded-full blur-3xl" />
+        <div className="absolute  h-full w-full bg-gradient-to-r from-blue-500 to-blue-800 transform scale-[0.80] rounded-full blur-sm" />
         <div className="relative  bg-blue-700 border border-blue-800  px-4 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
           <div className="h-5 w-5 rounded-full border flex items-center justify-center mb-4 border-gray-500">
             <svg
