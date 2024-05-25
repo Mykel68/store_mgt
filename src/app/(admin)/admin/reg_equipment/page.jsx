@@ -1,6 +1,17 @@
+"use client";
 import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  Settings,
+  Smile,
+  User,
+} from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -27,8 +38,49 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+const frameworks = [
+  {
+    value: "CAM",
+    label: "Camera",
+  },
+  {
+    value: "SPK",
+    label: "Speaker",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+];
 
 export default function page() {
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("");
   return (
     <Card className="w-full">
       <CardHeader>
@@ -94,7 +146,7 @@ export default function page() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <div>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Manufacturer</Label>
@@ -108,10 +160,57 @@ export default function page() {
               <Label htmlFor="name">Model number</Label>
               <Input id="name" placeholder="Name of the equipment" />
             </div>
+
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Product class</Label>
-              <Input id="name" placeholder="Name of the equipment" />
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={open}
+                    className="justify-between"
+                  >
+                    {value
+                      ? frameworks.find(
+                          (framework) => framework.value === value
+                        )?.label
+                      : "Select product class..."}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="p-0">
+                  <Command className="rounded-lg border shadow-md">
+                    <CommandInput placeholder="Type a command or search..." />
+                    <CommandList>
+                      <CommandEmpty>No results found.</CommandEmpty>
+                      <CommandGroup heading="Frameworks">
+                        {frameworks.map((framework) => (
+                          <CommandItem
+                            key={framework.value}
+                            onSelect={() => {
+                              setValue(framework.value);
+                              setOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                value === framework.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {framework.label}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
+
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Power Rating</Label>
               <Input id="name" placeholder="Name of the equipment" />
@@ -125,7 +224,7 @@ export default function page() {
               <Input id="name" placeholder="Name of the equipment" />
             </div>
           </div>
-        </form>
+        </div>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Cancel</Button>

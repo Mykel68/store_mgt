@@ -52,10 +52,6 @@ const page = () => {
                   <Input id="name" type="text" className="w-full" />
                 </div>
               </div>
-              <div className="grid gap-3">
-                <Label htmlFor="description">Description</Label>
-                <Textarea id="description" className="min-h-32" />
-              </div>
             </div>
           </CardContent>
         </Card>
