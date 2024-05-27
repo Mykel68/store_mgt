@@ -56,15 +56,15 @@ export default function Sidebar() {
               Home
             </Link>
             <Link
-              href="/admin/store_code"
+              href="/admin/store_item"
               className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                isActive("/admin/store_code")
+                isActive("/admin/store_item")
                   ? "bg-blue-600 text-white"
                   : "hover:bg-blue-500 hover:text-white"
               }`}
             >
               <ShoppingCart className="h-4 w-4" />
-              Products
+              Store item
               <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                 6
               </Badge>
@@ -78,17 +78,17 @@ export default function Sidebar() {
               }`}
             >
               <Package className="h-4 w-4" />
-              Register Equipments{" "}
+              Products{" "}
             </Link>
             <Link
               href="/admin/add_equipment"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hidden ${
                 isActive("/admin/add_equipment")
                   ? "bg-blue-600 text-white"
                   : "hover:bg-blue-500 hover:text-white"
               }`}
             >
-              <Users className="h-4 w-4" />
+              <Users className="h-4 w-4 " />
               Add Equipments
             </Link>
             <Link

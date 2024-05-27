@@ -21,7 +21,6 @@ import { Button } from "@/components/ui/button";
 const page = () => {
   return (
     <div>
-      {/* <h2 className="text-2xl font-semibold">Register equipment</h2> */}
       <form action="" className="flex flex-col  gap-2">
         <Card>
           <CardHeader>

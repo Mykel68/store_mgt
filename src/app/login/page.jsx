@@ -57,6 +57,7 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
+          <div className="flex"></div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
