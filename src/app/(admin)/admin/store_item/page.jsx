@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-
+import { Toaster, toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -38,25 +38,43 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
+import { cn } from "@/lib/utils";
 const page = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [manufacturers, setManufacturers] = useState([]);
 
   const onSubmit = async (data) => {
     try {
       // Send data to the backend using axios
-      const response = await axios.post("/api/equipment", data);
+      const response = await axios.post(
+        "http://localhost:5000/api/product/register",
+        data
+      );
       console.log(response.data);
-      // Handle success (e.g., close the dialog)
+      toast.success("Product added successfully");
     } catch (error) {
       console.error(error);
-      // Handle error (e.g., display an error message)
     }
   };
+
+  const fetchManufacturers = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/manufacturer"
+      );
+      setManufacturers(response.data);
+    } catch (error) {
+      console.error("Error fetching manufacturers:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchManufacturers();
+  }, []);
 
   return (
     <div>
@@ -77,16 +95,16 @@ const page = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5 py-4">
             {/* Model name input */}
             <div className="grid  items-center gap-2">
-              <Label htmlFor="name" className="text-left">
+              <Label htmlFor="model_name" className="text-left">
                 Model name
               </Label>
               <Input
-                id="name"
-                {...register("name", { required: true })}
+                id="model_name"
+                {...register("model_name", { required: true })}
                 className="col-span-3"
               />
               {/* Error message if model name is required */}
-              {errors.name && (
+              {errors.model_name && (
                 <Label className="text-red-500">Model name is required</Label>
               )}
             </div>
@@ -114,11 +132,20 @@ const page = () => {
               <Label htmlFor="manufacturer" className="text-left">
                 Manufacturer
               </Label>
-              <Input
-                id="manufacturer"
+              <select
+                name="manufacturer"
                 {...register("manufacturer", { required: true })}
-                className="col-span-3"
-              />
+                className={cn(
+                  "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                )}
+              >
+                <option value="">Select a manufacturer...</option>
+                {manufacturers.map((manufacturer) => (
+                  <option key={manufacturer.email} value={manufacturer.name}>
+                    {manufacturer.name}
+                  </option>
+                ))}
+              </select>
               {/* Error message if manufacturer is required */}
               {errors.manufacturer && (
                 <Label className="text-red-500">Manufacturer is required</Label>
@@ -130,7 +157,7 @@ const page = () => {
               <Label htmlFor="department" className="text-left">
                 Department
               </Label>
-              <Select
+              {/* <Select
                 {...register("department", { required: true })}
                 className="col-span-3"
               >
@@ -138,14 +165,32 @@ const page = () => {
                   <SelectValue placeholder="Select department" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="video">Video</SelectItem>
+                  <SelectItem value="video">
+                 
+                    Video
+                  </SelectItem>
                   <SelectItem value="audio">Audio</SelectItem>
                   <SelectItem value="teleprompting">Teleprompting</SelectItem>
                   <SelectItem value="streaming">Streaming</SelectItem>
                   <SelectItem value="graphics">Graphics</SelectItem>
                   <SelectItem value="others">Others</SelectItem>
                 </SelectContent>
-              </Select>
+              </Select> */}
+              <select
+                name="department"
+                {...register("department", { required: true })}
+                className={cn(
+                  "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                )}
+              >
+                <option value="">Select a department...</option>
+                <option value="video">Video</option>
+                <option value="audio">Audio</option>
+                <option value="teleprompting">Teleprompting</option>
+                <option value="streaming">Streaming</option>
+                <option value="graphics">Graphics</option>
+                <option value="others">Others</option>
+              </select>
               {/* Error message if department is required */}
               {errors.department && (
                 <Label className="text-red-500">Department is required</Label>
@@ -157,22 +202,18 @@ const page = () => {
               <Label htmlFor="product_class" className="text-left">
                 Product class
               </Label>
-              <Select
+              <select
+                name="product_class"
                 {...register("product_class", { required: true })}
-                className="col-span-3"
+                className={cn(
+                  "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                )}
               >
-                <SelectTrigger
-                  id="product_class"
-                  aria-label="Select product class"
-                >
-                  <SelectValue placeholder="Select product class" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="camera">Camera</SelectItem>
-                  <SelectItem value="microphone">Microphone</SelectItem>
-                  <SelectItem value="sweatshirt">Sweatshirt</SelectItem>
-                </SelectContent>
-              </Select>
+                <option value="">Select a product class...</option>
+                <option value="camera">Camera</option>
+                <option value="microphone">Microphone</option>
+                <option value="sweatshirt">Sweatshirt</option>
+              </select>
               {/* Error message if product class is required */}
               {errors.product_class && (
                 <Label className="text-red-500">
@@ -181,7 +222,6 @@ const page = () => {
               )}
             </div>
 
-            {/* Create button */}
             <div>
               <Button type="submit" className="bg-green-500 hover:bg-green-600">
                 Create
@@ -251,6 +291,7 @@ const page = () => {
           </Table>
         </CardContent>
       </Card>
+      <Toaster position="top-center" richColors expand={true} />
     </div>
   );
 };

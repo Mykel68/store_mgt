@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { addManufacturer } from "@/actions/manufacturer";
+import { Toaster, toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import {
@@ -39,6 +40,7 @@ import {
 } from "@/components/ui/command";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { revalidatePath } from "next/cache";
 const frameworks = [
   { value: "CAM", label: "Camera" },
   { value: "SPK", label: "Speaker" },
@@ -82,15 +84,13 @@ export default function Page() {
   }, []);
 
   const onSubmitManufacturer = async (data) => {
+    console.log(data);
     try {
-      await axios.post(
-        "http://localhost:5000/api/manufacturer/register-manufacturer",
-        data
-      );
-      console.log("Manufacturer added successfully");
-      resetManufacturer(); // Reset form after successful submission
+      await axios.post("http://localhost:5000/api/manufacturer", data);
+      toast.success("Manufacturer Added successfully");
+      resetManufacturer();
     } catch (error) {
-      console.error("Error adding manufacturer:", error);
+      toast.error(error.response.data);
     }
   };
 
@@ -165,6 +165,7 @@ export default function Page() {
                   <Input
                     {...registerManufacturer("phone_number", {
                       required: true,
+                      min: 10,
                     })}
                     className="col-span-3"
                   />
@@ -343,6 +344,7 @@ export default function Page() {
           </div>
         </form>
       </CardContent>
+      <Toaster richColors position="top-right" />
     </Card>
   );
 }
