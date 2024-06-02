@@ -102,6 +102,17 @@ export default function Sidebar() {
               <Users className="h-4 w-4" />
               Projects
             </Link>
+             <Link
+              href="/admin/request"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/request")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              Request
+            </Link>
             <Link
               href="#"
               className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all  hover:bg-blue-500 hover:text-white"

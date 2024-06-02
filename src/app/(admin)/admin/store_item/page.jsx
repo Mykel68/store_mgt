@@ -80,11 +80,15 @@ const page = () => {
 
   return (
     <div>
-      <Dialog>
+  
+      <Card className="">
+        <CardHeader className="px-7">
+          <div className="flex justify-between ">          <CardTitle>Store code</CardTitle>
+              <Dialog>
         <DialogTrigger asChild>
           <Button
             variant="secondary"
-            className="float-end bg-blue-500 text-white hover:bg-blue-600 mt-3 me-3"
+            className=" bg-blue-500 text-white hover:bg-blue-600   "
           >
             Add Product
           </Button>
@@ -231,11 +235,34 @@ const page = () => {
             </div>
           </form>
         </DialogContent>
-      </Dialog>
-      <Card className="">
-        <CardHeader className="px-7">
-          <CardTitle>Store code</CardTitle>
+            </Dialog>
+            </div>
+
           <CardDescription>Equipment list.</CardDescription>
+          <div className="border-b-2  py-2" >
+            <div className="flex">
+
+            <div className="flex items-center gap-2   ">
+                <Label htmlFor="filter" className=" text-nowrap 
+              ">
+                Filter By:
+              </Label>
+              <select
+                name="filter"
+                {...register("filter", { required: true })}
+                className={cn(
+                  "flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                )}
+              >
+                <option value="store_code">Store code</option>
+                <option value="date">Date</option>
+                <option value="product_class">Product class</option>
+               
+              </select>
+       
+            </div>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <Table>
