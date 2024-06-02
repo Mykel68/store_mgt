@@ -13,13 +13,13 @@ export default function Component() {
     <Card className>
       <CardHeader className="pb-2">
         <CardDescription>Number of Equipment</CardDescription>
-        <CardTitle className="text-4xl">329</CardTitle>
+        <CardTitle className="text-4xl">339</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="text-xs text-muted-foreground">+25% from last week</div>
       </CardContent>
       <CardFooter>
-        <Progress value={25} aria-label="25% increase" />
+        <Progress className="via-red-300" value={25} aria-label="25% increase" />
       </CardFooter>
     </Card>
   );

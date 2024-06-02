@@ -52,6 +52,7 @@ const frameworks = [
 export default function Page() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+  const [manufacturers, setManufacturers] = useState([]);
 
   const {
     register: registerManufacturer,
@@ -66,7 +67,7 @@ export default function Page() {
     formState: { errors: equipmentErrors },
   } = useForm();
 
-  const [manufacturers, setManufacturers] = useState([]);
+  
 
   const fetchManufacturers = async () => {
     try {
@@ -81,7 +82,7 @@ export default function Page() {
 
   useEffect(() => {
     fetchManufacturers();
-  }, []);
+  }, [manufacturers]);
 
   const onSubmitManufacturer = async (data) => {
     console.log(data);
@@ -99,13 +100,14 @@ export default function Page() {
       console.log(data);
       // Adjust the endpoint or logic for registering equipment
       await axios.post(
-        "http://localhost:5000/api/equipment/register-equipment",
+        "http://localhost:5000/api/equipment/register",
         data
       );
-      console.log("Equipment added successfully");
+      toast.success("Equipment added successfully");
       resetEquipment(); // Reset form after successful submission
     } catch (error) {
       console.error("Error adding equipment:", error);
+       toast.error("Adding equipment failed");
     }
   };
 
@@ -255,20 +257,20 @@ export default function Page() {
 
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="modelName">Model name</Label>
-              <Input {...registerEquipment("name", { required: true })} />
+              <Input {...registerEquipment("model_name", { required: true })} />
               {equipmentErrors.name && (
                 <Label className="text-red-500">Name is required</Label>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="modelNumber">Model number</Label>
-              <Input {...registerEquipment("model_name", { required: true })} />
+              <Input {...registerEquipment("model_number", { required: true })} />
               {equipmentErrors.model_name && (
                 <Label className="text-red-500">model name is required</Label>
               )}
             </div>
 
-            <div className="flex flex-col space-y-1.5">
+            {/* <div className="flex flex-col space-y-1.5">
               <Label htmlFor="productClass">Product class</Label>
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
@@ -295,9 +297,7 @@ export default function Page() {
                         {frameworks.map((framework) => (
                           <CommandItem
                             key={framework.value}
-                            {...registerEquipment("product_class", {
-                              required: true,
-                            })}
+                        
                             onSelect={() => {
                               setValue(framework.value);
                               setOpen(false);
@@ -310,7 +310,10 @@ export default function Page() {
                                 value === framework.value
                                   ? "opacity-100"
                                   : "opacity-0"
-                              )}
+                              ) }
+                                  {...registerEquipment("product_class", {
+                              required: true,
+                            })}
                             />
                             {framework.label}
                           </CommandItem>
@@ -323,6 +326,30 @@ export default function Page() {
               {equipmentErrors.product_class && (
                 <Label className="text-red-500">
                   Product class is required
+                </Label>
+              )}
+            </div> */}
+
+              <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="product_class">Product class</Label>
+
+              <select
+                name="product_class"
+                {...registerEquipment("product_class", { required: true })}
+                className={cn(
+                  "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                )}
+              >
+                <option value="">Select a product class...</option>
+                {frameworks.map((framework) => (
+                  <option key={framework.label} value={framework.value}>
+                    {framework.label}
+                  </option>
+                ))}
+              </select>
+              {equipmentErrors.framework && (
+                <Label className="text-red-500">
+                  Product class  is required
                 </Label>
               )}
             </div>

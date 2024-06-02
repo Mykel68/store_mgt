@@ -113,6 +113,17 @@ export default function Sidebar() {
               <Users className="h-4 w-4" />
               Request
             </Link>
+                 <Link
+              href="/admin/purchase"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                isActive("/admin/purchase")
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-500 hover:text-white"
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              Purchase
+            </Link>
             <Link
               href="#"
               className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all  hover:bg-blue-500 hover:text-white"

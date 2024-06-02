@@ -42,10 +42,10 @@ export default function BackgroundBeamsDemo() {
         </p>
         <Input
           type="text"
-          placeholder="hi@manuarora.in"
+          placeholder="Find equipments..."
           className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10 mt-4   bg-slate-100 placeholder:text-neutral-700"
         />
-        <Button className="relative z-10 mt-4 w-full">Search</Button>
+        <Button className="bg-blue-600 relative z-10 mt-4 w-full hover:bg-blue-500">Search</Button>
       </div>
       <BackgroundBeams />
     </div>

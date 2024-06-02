@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -47,10 +48,13 @@ export default function LoginPage() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="container mx-auto flex min-h-screen items-center justify-center"
+      className="container mx-auto flex min-h-screen items-center justify-center flex-col gap-1.5"
     >
-      <Card className="w-full max-w-sm">
+        <p className="text-3xl font-semibold ">DCLM Store Admin </p>
+      <Card className="w-full max-w-sm bg-gray-50">
+      
         <CardHeader>
+          
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
             Enter your email below to login to your account.
@@ -64,7 +68,8 @@ export default function LoginPage() {
               id="email"
               type="email"
               {...register("email", { required: "Email is required" })}
-              error={!!errors.email?.message}
+              error={ !!errors.email?.message }
+                className="z-10"
             />
             {errors.email?.message && (
               <p role="alert" className="text-red-500">
@@ -78,7 +83,8 @@ export default function LoginPage() {
               id="password"
               type="password"
               {...register("password", { required: "Password is required" })}
-              error={!!errors.password?.message}
+              error={ !!errors.password?.message }
+              className="z-10"
             />
             {errors.password?.message && (
               <p role="alert" className="text-red-500">
@@ -88,11 +94,12 @@ export default function LoginPage() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" loading={loading}>
+          <Button className="w-full bg-blue-600 hover:bg-blue-500 " loading={loading}>
             Sign in
           </Button>
         </CardFooter>
       </Card>
+      <BackgroundBeams/>
     </form>
   );
 }
