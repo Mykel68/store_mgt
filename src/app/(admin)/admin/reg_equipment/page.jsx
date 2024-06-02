@@ -158,22 +158,36 @@ export default function Page() {
                     <Label className="text-red-500">Email is required</Label>
                   )}
                 </div>
-                <div className="grid grid-cols-2 items-center gap-2">
+                <div className="grid  items-center gap-2">
                   <Label htmlFor="phone_number" className="text-left">
                     Phone number
                   </Label>
+                  <div className="flex gap-2">
+                                       <select
+                name="country_code"
+                {...registerManufacturer("country_code", { required: true })}
+                className={cn(
+                  "flex  h-10 w-[80px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                )}
+              >
+                <option value="+234" defaultValue="+234">+234</option>
+       
+              </select>
                   <Input
                     {...registerManufacturer("phone_number", {
                       required: true,
                       min: 10,
                     })}
-                    className="col-span-3"
-                  />
-                  {manufacturerErrors.phone_number && (
+                    className=""
+                    />
+            
+                  </div>
+                                {manufacturerErrors.phone_number && (
                     <Label className="text-red-500">
                       Phone number is required
                     </Label>
                   )}
+            
                 </div>
                 <div className="grid grid-cols-2 items-center gap-2">
                   <Label htmlFor="address" className="text-left">
@@ -285,10 +299,9 @@ export default function Page() {
                               required: true,
                             })}
                             onSelect={() => {
-                              // setValue(framework.value);
+                              setValue(framework.value);
                               setOpen(false);
                               console.log(framework.value);
-                              setValue("product_class", "framework.value");
                             }}
                           >
                             <Check

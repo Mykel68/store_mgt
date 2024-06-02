@@ -52,6 +52,8 @@ const page = () => {
       // Send data to the backend using axios
       const response = await axios.post(
         "http://localhost:5000/api/product/register",
+        // `${process.env.BACKEND_URL}/api/product/register`,
+
         data
       );
       console.log(response.data);
