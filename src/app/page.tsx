@@ -31,9 +31,9 @@ import { Button } from "@/components/ui/button";
 
 export default function BackgroundBeamsDemo() {
   return (
-    <div className="h-screen w-full  bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+    <div className="h-screen w-full  bg-slate-100 relative flex flex-col items-center justify-center antialiased">
       <div className="max-w-2xl mx-auto p-4">
-        <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
+        <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-blue-800 to-blue-600  text-center font-sans font-bold">
     DCLM Store Management App
         </h1>
         <p></p>
@@ -43,7 +43,7 @@ export default function BackgroundBeamsDemo() {
         <Input
           type="text"
           placeholder="hi@manuarora.in"
-          className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10 mt-4  bg-neutral-950 placeholder:text-neutral-700"
+          className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10 mt-4   bg-slate-100 placeholder:text-neutral-700"
         />
         <Button className="relative z-10 mt-4 w-full">Search</Button>
       </div>
