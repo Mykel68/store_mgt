@@ -94,7 +94,7 @@ export default function LoginPage() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full bg-blue-600 hover:bg-blue-500 " loading={loading}>
+          <Button className="w-full bg-blue-600 hover:bg-blue-500 cursor-auto " loading={loading}>
             Sign in
           </Button>
         </CardFooter>

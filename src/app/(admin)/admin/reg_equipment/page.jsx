@@ -41,6 +41,7 @@ import {
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { revalidatePath } from "next/cache";
+// import {fetchManufacturers} from "@/actions/serverActions"
 const frameworks = [
   { value: "CAM", label: "Camera" },
   { value: "SPK", label: "Speaker" },
@@ -67,12 +68,17 @@ export default function Page() {
     formState: { errors: equipmentErrors },
   } = useForm();
 
+
   
 
+  
+ 
   const fetchManufacturers = async () => {
+
+    // "use server";
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/manufacturer"
+        "http://localhost:5000/api/manufacturer",{cache:no-cache}
       );
       setManufacturers(response.data);
     } catch (error) {
@@ -82,7 +88,10 @@ export default function Page() {
 
   useEffect(() => {
     fetchManufacturers();
-  }, [manufacturers]);
+    
+  }, []);
+
+  
 
   const onSubmitManufacturer = async (data) => {
     console.log(data);
@@ -111,8 +120,11 @@ export default function Page() {
     }
   };
 
+ 
   return (
     <Card className="w-full">
+
+      
       <CardHeader>
         <CardTitle>Register Equipment</CardTitle>
         <CardDescription>
