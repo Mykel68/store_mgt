@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -39,44 +39,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-const page = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [manufacturers, setManufacturers] = useState([]);
+const Page = () => {
 
-  const onSubmit = async (data) => {
-    try {
-      // Send data to the backend using axios
-      const response = await axios.post(
-        "http://localhost:5000/api/product/register",
-        // `${process.env.BACKEND_URL}/api/product/register`,
 
-        data
-      );
-      console.log(response.data);
-      toast.success("Product added successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  const fetchManufacturers = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/api/manufacturer"
-      );
-      setManufacturers(response.data);
-    } catch (error) {
-      console.error("Error fetching manufacturers:", error);
-    }
-  };
 
-  useEffect(() => {
-    fetchManufacturers();
-  }, []);
 
   return (
     <div>
@@ -169,10 +136,10 @@ const page = () => {
           </Table>
         </CardContent>
       </Card> */}
-          purchase page
+          purchase Page
       <Toaster position="top-center" richColors expand={true} />
     </div>
   );
 };
 
-export default page;
+export default Page;

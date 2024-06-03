@@ -39,7 +39,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-const page = () => {
+const Page = () => {
   const {
     register,
     handleSubmit,
@@ -325,4 +325,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
