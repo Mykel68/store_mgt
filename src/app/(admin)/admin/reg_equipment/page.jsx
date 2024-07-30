@@ -75,10 +75,10 @@ export default function Page() {
  
   const fetchManufacturers = async () => {
 
-    // "use server";
+
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/manufacturer",{cache:no-cache}
+        "http://localhost:5000/api/manufacturer"
       );
       setManufacturers(response.data);
     } catch (error) {
@@ -253,7 +253,7 @@ export default function Page() {
                   "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
                 )}
               >
-                <option value="">Select a manufacturer...</option>
+                <option value="" >Select a manufacturer...</option>
                 {manufacturers.map((manufacturer) => (
                   <option key={manufacturer.email} value={manufacturer.name}>
                     {manufacturer.name}
@@ -270,15 +270,15 @@ export default function Page() {
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="modelName">Model name</Label>
               <Input {...registerEquipment("model_name", { required: true })} />
-              {equipmentErrors.name && (
-                <Label className="text-red-500">Name is required</Label>
+              {equipmentErrors.model_name && (
+                <Label className="text-red-500">Model name is required</Label>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="modelNumber">Model number</Label>
               <Input {...registerEquipment("model_number", { required: true })} />
               {equipmentErrors.model_name && (
-                <Label className="text-red-500">model name is required</Label>
+                <Label className="text-red-500">Model name is required</Label>
               )}
             </div>
 
@@ -352,14 +352,14 @@ export default function Page() {
                   "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
                 )}
               >
-                <option value="">Select a product class...</option>
+                <option value="" >Select a product class...</option>
                 {frameworks.map((framework) => (
-                  <option key={framework.label} value={framework.value}>
+                  <option key={framework.label} value={framework.value} className="py-2 px-3 ">
                     {framework.label}
                   </option>
                 ))}
               </select>
-              {equipmentErrors.framework && (
+              {equipmentErrors.product_class && (
                 <Label className="text-red-500">
                   Product class  is required
                 </Label>
@@ -372,14 +372,14 @@ export default function Page() {
                 {...registerEquipment("power_rating", { required: true })}
               />
               {equipmentErrors.power_rating && (
-                <Label className="text-red-500">power rating is required</Label>
+                <Label className="text-red-500">Power rating is required</Label>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="weight">Weight</Label>
               <Input {...registerEquipment("weight", { required: true })} />
               {equipmentErrors.weight && (
-                <Label className="text-red-500">weight is required</Label>
+                <Label className="text-red-500">Weight is required</Label>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">

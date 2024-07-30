@@ -52,9 +52,6 @@ const Page = () => {
       <Card className="">
         <CardHeader className="px-7">
          <CardTitle>Request</CardTitle>
-       
-      
-
           <CardDescription>Equipment requested list.</CardDescription>
           <div className="border-b-2  py-2" >
             <div className="flex">
