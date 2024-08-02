@@ -30,7 +30,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="hidden border-r bg-[#1F2B4E] md:block  max-h-screen  ">
+    <div className="hidden border-r bg-[#1F2B4E] md:block  min-h-screen  ">
       <div className="flex h-full flex-col gap-2   ">
         <div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-6 ">
           <Link href="/admin" className="flex items-center gap-2 font-semibold">
