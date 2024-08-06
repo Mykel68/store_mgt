@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { addManufacturer } from "@/actions/manufacturer";
 import { Toaster, toast } from "sonner";
 
 import { cn } from "@/lib/utils";
@@ -25,19 +23,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { revalidatePath } from "next/cache";
@@ -68,14 +53,7 @@ export default function Page() {
     formState: { errors: equipmentErrors },
   } = useForm();
 
-
-  
-
-  
- 
   const fetchManufacturers = async () => {
-
-
     try {
       const response = await axios.get(
         "http://localhost:5000/api/manufacturer"
@@ -88,10 +66,7 @@ export default function Page() {
 
   useEffect(() => {
     fetchManufacturers();
-    
   }, []);
-
-  
 
   const onSubmitManufacturer = async (data) => {
     console.log(data);
@@ -108,23 +83,17 @@ export default function Page() {
     try {
       console.log(data);
       // Adjust the endpoint or logic for registering equipment
-      await axios.post(
-        "http://localhost:5000/api/equipment/register",
-        data
-      );
+      await axios.post("http://localhost:5000/api/equipment/register", data);
       toast.success("Equipment added successfully");
       resetEquipment(); // Reset form after successful submission
     } catch (error) {
       console.error("Error adding equipment:", error);
-       toast.error("Adding equipment failed");
+      toast.error("Adding equipment failed");
     }
   };
 
- 
   return (
     <Card className="w-full">
-
-      
       <CardHeader>
         <CardTitle>Register Equipment</CardTitle>
         <CardDescription>
@@ -177,31 +146,32 @@ export default function Page() {
                     Phone number
                   </Label>
                   <div className="flex gap-2">
-                                       <select
-                name="country_code"
-                {...registerManufacturer("country_code", { required: true })}
-                className={cn(
-                  "flex  h-10 w-[80px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
-                )}
-              >
-                <option value="+234" defaultValue="+234">+234</option>
-       
-              </select>
-                  <Input
-                    {...registerManufacturer("phone_number", {
-                      required: true,
-                      min: 10,
-                    })}
-                    className=""
+                    <select
+                      name="country_code"
+                      {...registerManufacturer("country_code", {
+                        required: true,
+                      })}
+                      className={cn(
+                        "flex  h-10 w-[80px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                      )}
+                    >
+                      <option value="+234" defaultValue="+234">
+                        +234
+                      </option>
+                    </select>
+                    <Input
+                      {...registerManufacturer("phone_number", {
+                        required: true,
+                        min: 10,
+                      })}
+                      className=""
                     />
-            
                   </div>
-                                {manufacturerErrors.phone_number && (
+                  {manufacturerErrors.phone_number && (
                     <Label className="text-red-500">
                       Phone number is required
                     </Label>
                   )}
-            
                 </div>
                 <div className="grid grid-cols-2 items-center gap-2">
                   <Label htmlFor="address" className="text-left">
@@ -242,7 +212,7 @@ export default function Page() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmitEquipment(onSubmitEquipment)}>
-          <div className="grid w-full items-center gap-4">
+          <div className="grid w-full items-center gap-4 grid-cols-2">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="manufacturer">Manufacturer</Label>
 
@@ -253,7 +223,7 @@ export default function Page() {
                   "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
                 )}
               >
-                <option value="" >Select a manufacturer...</option>
+                <option value="">Select a manufacturer...</option>
                 {manufacturers.map((manufacturer) => (
                   <option key={manufacturer.email} value={manufacturer.name}>
                     {manufacturer.name}
@@ -276,73 +246,15 @@ export default function Page() {
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="modelNumber">Model number</Label>
-              <Input {...registerEquipment("model_number", { required: true })} />
+              <Input
+                {...registerEquipment("model_number", { required: true })}
+              />
               {equipmentErrors.model_name && (
                 <Label className="text-red-500">Model name is required</Label>
               )}
             </div>
 
-            {/* <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="productClass">Product class</Label>
-              <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className="justify-between"
-                  >
-                    {value
-                      ? frameworks.find(
-                          (framework) => framework.value === value
-                        )?.label
-                      : "Select product class..."}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="p-0">
-                  <Command className="rounded-lg border shadow-md">
-                    <CommandInput placeholder="Type a command or search..." />
-                    <CommandList>
-                      <CommandEmpty>No results found.</CommandEmpty>
-                      <CommandGroup heading="Frameworks">
-                        {frameworks.map((framework) => (
-                          <CommandItem
-                            key={framework.value}
-                        
-                            onSelect={() => {
-                              setValue(framework.value);
-                              setOpen(false);
-                              console.log(framework.value);
-                            }}
-                          >
-                            <Check
-                              className={cn(
-                                "mr-2 h-4 w-4",
-                                value === framework.value
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              ) }
-                                  {...registerEquipment("product_class", {
-                              required: true,
-                            })}
-                            />
-                            {framework.label}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-              {equipmentErrors.product_class && (
-                <Label className="text-red-500">
-                  Product class is required
-                </Label>
-              )}
-            </div> */}
-
-              <div className="flex flex-col space-y-1.5">
+            <div className="flex flex-col space-y-1.5">
               <Label htmlFor="product_class">Product class</Label>
 
               <select
@@ -352,16 +264,20 @@ export default function Page() {
                   "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
                 )}
               >
-                <option value="" >Select a product class...</option>
+                <option value="">Select a product class...</option>
                 {frameworks.map((framework) => (
-                  <option key={framework.label} value={framework.value} className="py-2 px-3 ">
+                  <option
+                    key={framework.label}
+                    value={framework.value}
+                    className="py-2 px-3 "
+                  >
                     {framework.label}
                   </option>
                 ))}
               </select>
               {equipmentErrors.product_class && (
                 <Label className="text-red-500">
-                  Product class  is required
+                  Product class is required
                 </Label>
               )}
             </div>
